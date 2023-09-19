@@ -114,117 +114,121 @@ typedef struct builtin
 } builtin_table;
 
 
-
+/*  the string functions.c */
 int my_strlen(char *);
 int my_strcmp(char *, char *);
 char *mystrats_with(const char *, const char *);
 char *my_strcat(char *, char *);
 
-
+/* the string functions2.c */
 char *my_strcpy(char *, char *);
 char *my_strdup(const char *);
 void my_puts(char *);
 int my_putchar(char);
 
-
+/* the string functions3.c */
 char *my_strncpy(char *, char *, int);
 char *my_strncat(char *, char *, int);
 char *my_strchr(char *, char);
 
-
+/* the string functions4.c */
 char **firststrtow(char *, char *);
 char **secondstrtow(char *, char);
 
-
+/* the memory functions */
 char *my_memset(char *, char, unsigned int);
 void myfree(char **);
 void *my_realloc(void *, unsigned int, unsigned int);
 
-
+/* the memory functions2.c */
 int afree(void **);
 
-
+/* the more functions.c */
 int interactivemode (info_t *);
 int my_delim(char, char *);
 int my_alpha(int);
 int my_atoi(char *);
 
-
+/* the more functions2.c */
 int my_erratoi1(char *);
 void prt_error1(info_t *,char *);
 int prt_d1(int, int);
 char *cnv_number(long int, int, int);
 void rmv_comments(char *);
 
-
+/* the liststr.c*/
 list_t *myadd_node1(list_t **, const char *, int);
 list_t *myadd_node1_end(list_t **, const char *, int);
 size_t print_ls_str(const list_t *);
 int dlt_node1_in_index(list_t **, unsigned int);
 void free_list1(list_t **);
 
-
+/* the liststr2.c */
 size_t list1len(const list_t *);
 char **list1_str(list_t *);
 size_t print_ls1(const list_t *);
 list_t *node1_starts(list_t *, char *, char);
 ssize_t get_node1(list_t *, list_t *);
 
+/* error string functions.c */
 void rputs(char *);
 int f_putchar(char);
 int put_fd(char d, int myfd);
 int puts_fd(char *str, int myfd);
 
-
+/* info.c  */
 void clear1_myinfo1(info_t *);
 void set1_myinfo1(info_t *, char **);
 void free1_myinfo1(info_t *, int);
 
-
+/* env.c  */
 char *get_env(info_t *, const char *);
 int env(info_t *);
 int set_env(info_t *);
 int remove_setenv(info_t *);
 int populate1_env_ls1(info_t *);
 
-
+/* env2.c  */
 char **_getmyenv(info_t *);
 int dlt_setenv(info_t *, char *);
 int set_myenv(info_t *, char *, char *);
 
+/* io functions.c */
 char *get_myhistoryfile(info_t *myinfo);
 int write_myhistory(info_t *myinfo);
 int read_myhistory(info_t *myinfo);
 int build_myhistoryls(info_t *myinfo, char *buf, int mylinecount);
 int refresh_sequence_numbers(info_t *myinfo);
 
-
+/* builtin emulators.c */
 int my_exit1(info_t *);
 int my_cd1(info_t *);
 int my_help1(info_t *);
 
-
+/* builtinemulators2.c */
 int my_history1(info_t *);
 int my_alias(info_t *); 
 int get_node1_index(list_t *list, int index);
 int unset_alias(info_t *myinfo, char *str);
 
-
+/* path.c */
 int my_cmd(info_t *, char *);
 char *dupli_mychars(char *, int, int);
 char *find_mypath(info_t *, char *, char *);
 
+/* chain.c */
 int my_chain(info_t *, char *, size_t *);
 void checkk_mychain(info_t *, char *, size_t *, size_t, size_t);
 int replace_myalias(info_t *);
 int replace_str(char **, char *);
 int rplc_myvars(info_t *);
 
-
+/* getline.c  */
 ssize_t _get_input(info_t *);
 int get_myline(info_t *, char **, size_t *);
 void sigintHandler(int);
 
+/* hsh.c */
 int _hsh(info_t *, char **);
 int find_the_builtin(info_t *);
 void find_the_cmd(info_t *);
