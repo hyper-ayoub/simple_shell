@@ -1,33 +1,33 @@
 #include "shell.h"
 
 /**
-*my_strlen - returns the length of a string
-*@s: the string whose length to check
-*
-*Return: integer length of string
-*/
+ * my_strlen - returns the length of a string
+ * @s:  string whose length to check
+ *
+ * Return: integer length of the string
+ */
 int my_strlen(char *s)
 {
-    int i = 0;
+	if (!s)
+		return (0);
 
-    if (!s) 
-        return (0);
+	int i = 0;
 
-    while (*s++)
-        i++;
-    return (i);        
+	while (*s++)
+		i++;
+	return (i);
 }
 
 /**
-*my_strcmp - performs lexicogarphic comparison of the two strangs.
-*@s2: the first strang
-*@s3: the second strang
-*
-*Return: negative if s2 < s3, positive if s2 > s3, zero if s2 == s3
-*/
+ * my_strcmp - performs lexicographic comparison of the two strings
+ * @s2: first string
+ * @s3: second string
+ *
+ * Return: negative if s2 < s3, positive if s2 > s3, zero if s2 == s3
+ */
 int my_strcmp(char *s2, char *s3)
 {
-    while (*s2 && *s3)
+	while (*s2 && *s3)
 	{
 		if (*s2 != *s3)
 			return (*s2 - *s3);
@@ -41,24 +41,25 @@ int my_strcmp(char *s2, char *s3)
 }
 
 /**
-*mystrats_with - checks if needle strats with baystack
-*@baystack: string to search
-*@needle: the substring to find
-*
-*Return: the address of next char of baystack or NUll
-*/
-char *mystrats_with (const char *baystack, const char *needle)
+ * mystrats_with - checks if needle starts with haystack
+ * @baystack: the tring to search
+ * @needle: the substring to find
+ *
+ * Return: the address of the next char of baystack or NULL
+ */
+char *mystrats_with(const char *baystack, const char *needle)
 {
-    while (*needle)
-        if (*needle++ != *baystack++)
-            return (NULL);
-    return ((char *)baystack);      
+	while (*needle)
+		if (*needle++ != *baystack++)
+			return (NULL);
+
+	return ((char *)baystack);
 }
 
 /**
- * my_strcat - concatenates of the two strings
- * @mydest: the destination buffer
- * @mysrc: the source buffer
+ * my_strcat - concatenates two strings
+ * @mydest: the destination of buffer
+ * @mysrc: the source of buffer
  *
  * Return: pointer to destination buffer
  */
@@ -68,9 +69,10 @@ char *my_strcat(char *mydest, char *mysrc)
 
 	while (*mydest)
 		mydest++;
+
 	while (*mysrc)
 		*mydest++ = *mysrc++;
+
 	*mydest = *mysrc;
 	return (ret0);
 }
-

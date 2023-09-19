@@ -1,76 +1,160 @@
 #include "shell.h"
+#include <string.h> /* Add this line to include the string.h header. */
 
 /**
-*my_strlen - returns the length of a string
-*@s: the string whose length to check
-*
-*Return: integer length of string
-*/
-int my_strlen(char *s)
-{
-    int i = 0;
-
-    if (!s) 
-        return (0);
-
-    while (*s++)
-        i++;
-    return (i);        
-}
-
-/**
-*my_strcmp - performs lexicogarphic comparison of the two strangs.
-*@s2: the first strang
-*@s3: the second strang
-*
-*Return: negative if s2 < s3, positive if s2 > s3, zero if s2 == s3
-*/
-int my_strcmp(char *s2, char *s3)
-{
-    while (*s2 && *s3)
-	{
-		if (*s2 != *s3)
-			return (*s2 - *s3);
-		s2++;
-		s3++;
-	}
-	if (*s2 == *s3)
-		return (0);
-	else
-		return (*s2 < *s3 ? -1 : 1);
-}
-
-/**
-*mystrats_with - checks if needle strats with baystack
-*@baystack: string to search
-*@needle: the substring to find
-*
-*Return: the address of next char of baystack or NUll
-*/
-char *mystrats_with (const char *baystack, const char *needle)
-{
-    while (*needle)
-        if (*needle++ != *baystack++)
-            return (NULL);
-    return ((char *)baystack);      
-}
-
-/**
- * my_strcat - concatenates of the two strings
- * @mydest: the destination buffer
- * @mysrc: the source buffer
+ * myadd_node1 - adds the  node to the start of the list
+ * @h:  the address of pointer to head node
+ * @str: str field of node
+ * @num: node index used by  the history
  *
- * Return: pointer to destination buffer
+ * Return: size of list
  */
-char *my_strcat(char *mydest, char *mysrc)
+list_t *myadd_node1(list_t **h, const char *str, int num)
 {
-	char *ret0 = mydest;
+	list_t *first_h;
 
-	while (*mydest)
-		mydest++;
-	while (*mysrc)
-		*mydest++ = *mysrc++;
-	*mydest = *mysrc;
-	return (ret0);
+	if (!h)
+		return (NULL);
+	first_h = malloc(sizeof(list_t));
+	if (!first_h)
+		return (NULL);
+	memset((void *)first_h, 0, sizeof(list_t));
+	first_h->num = num;
+	if (str)
+	{
+		first_h->str = strdup(str); /* Change _strdup to strdup */
+		if (!first_h->str)
+		{
+			free(first_h);
+			return (NULL);
+		}
+	}
+	first_h->next = *h;
+	*h = first_h;
+	return (first_h);
 }
 
+/**
+ * add_node1_end - adds the node to the end of the list
+ * @h: the address of pointer to head node
+ * @str: str field of node
+ * @num: node index used by the history
+ *
+ * Return: size of list
+ */
+list_t *add_node1_end(list_t **h, const char *str, int num)
+{
+	list_t *first_node1, *node1;
+
+	if (!h)
+		return (NULL);
+
+	node1 = *h;
+	first_node1 = malloc(sizeof(list_t));
+	if (!first_node1)
+		return (NULL);
+	memset((void *)first_node1, 0, sizeof(list_t));
+	first_node1->num = num;
+	if (str)
+	{
+		first_node1->str = strdup(str); /* Change _strdup to strdup */
+		if (!first_node1->str)
+		{
+			free(first_node1);
+			return (NULL);
+		}
+	}
+	if (node1)
+	{
+		while (node1->next)
+			node1 = node1->next;
+		node1->next = first_node1;
+	}
+	else
+		*h = first_node1;
+	return (first_node1);
+}
+
+/**
+ * free_list1 - frees all nodes of a list
+ * @h_ptr:  the address of pointer to head node
+ *
+ * Return: void
+ */
+void free_list1(list_t **h_ptr)
+{
+	list_t *node1, *first_node1, *h;
+
+	if (!h_ptr || !*h_ptr)
+		return;
+	h = *h_ptr;
+	node1 = h;
+	while (node1)
+	{
+		first_node1 = node1->next;
+		free(node1->str);
+		free(node1);
+		node1 = first_node1;
+	}
+	*h_ptr = NULL;
+}
+
+/**
+ * print_ls_str - prints only the str element of a list_t linked list
+ * @p:  the pointer to first node
+ *
+ * Return: size of list
+ */
+size_t print_ls_str(const list_t *p)
+{
+	size_t i = 0;
+
+	while (p)
+	{
+		puts(p->str ? p->str : "(nil)");
+		puts("\n");
+		p = p->next;
+		i++;
+	}
+	return (i);
+}
+
+/**
+ * dlt_node1_in_index - deletes node at given index
+ * @h:  the address of pointer to first node
+ * @index:  the index of node to delete
+ *
+ * Return: 1 on success, 0 on failure
+ */
+int dlt_node1_in_index(list_t **h, unsigned int index)
+{
+	list_t *node1, *first_node1;
+	unsigned int i = 0;
+
+	if (!h || !*h)
+		return (0);
+
+	if (!index)
+	{
+		node1 = *h;
+		*h = (*h)->next;
+		free(node1->str);
+		free(node1);
+		return (1);
+	}
+	node1 = *h;
+	while (node1)
+	{
+		if (i == index)
+		{
+			first_node1->next = node1->next;
+			free(node1->str);
+			free(node1);
+			return (1);
+		}
+		i++;
+		first_node1 = node1;
+		node1 = node1->next;
+	}
+	return (0);
+}
