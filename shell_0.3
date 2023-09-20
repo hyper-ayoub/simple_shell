@@ -1,0 +1,10 @@
+#!/bin/bash
+
+# Example string
+my_string="Hello, World!"
+
+# Use sed to replace "World" with "Universe"
+my_string=$(echo "$my_string" | sed 's/World/Universe/')
+
+# Print the modified string
+echo "$my_string"
